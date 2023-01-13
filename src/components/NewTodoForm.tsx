@@ -1,7 +1,9 @@
 import React, {useState} from 'react'
-import MyModal from './MyModal';
+import Modal from 'react-bootstrap/Modal';
 
-function NewTodoForm(props){
+export const NewTodoForm : React.FC<{
+    addTodo:Function
+}> = (props) => {
     const [description, setDescription] = useState('');
     const [assigned, setAssigned] = useState('');
     const [modalStatus, setModalStatus] = useState(false);
@@ -11,7 +13,8 @@ function NewTodoForm(props){
             setDescription('');
             setAssigned('');
         }else{
-            setModalStatus(true);
+            // setModalStatus(true);
+            alert("Please check your again!");
         }
     }
     // const descriptionChange = (event) =>{
@@ -22,7 +25,7 @@ function NewTodoForm(props){
     // }
     return(
         <div className="mt-5">
-            <MyModal show={modalStatus} onHide={()=>setModalStatus(false)}/>
+            {/* <myModal show={modalStatus} onHide={()=>setModalStatus(false)}/> */}
             <form>
                 <div className="mb-3">
                     <label className='form-label'>Assigned</label>
@@ -38,7 +41,8 @@ function NewTodoForm(props){
                     <input 
                     type="text" 
                     className='form-control' 
-                    rows={3} required
+                    required
+                    height={300}
                     onChange={e => setDescription(e.target.value)}
                     value={description}></input>
                 </div>
@@ -46,12 +50,10 @@ function NewTodoForm(props){
                 type='button' 
                 className='btn btn-primary mt-3'
                 onClick={submitTodo}>
-                    <i class="bi bi-send-plus-fill"></i>
+                    <i className="bi bi-send-plus-fill"></i>
                     &nbsp;Create New Todos
                 </button>
             </form>
         </div>
     )
 }
-
-export default NewTodoForm;
